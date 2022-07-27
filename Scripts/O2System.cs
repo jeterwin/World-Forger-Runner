@@ -13,17 +13,7 @@ public class O2System : MonoBehaviour
     void FixedUpdate()
     {
         IconO2.fillAmount -= Time.deltaTime * speed;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && IconO2.fillAmount <= 0.5f)
-        {
-            speed += SprintSpeedO2;
-            PlayerMovement.instance.speed = 12;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift) && IconO2.fillAmount <= 0.5f)
-        {
-            speed -= SprintSpeedO2;
-            PlayerMovement.instance.speed = 7;
-        }
-        if (IconO2.fillAmount <= 0.5f)
+        if (IconO2.fillAmount <= 0.05f)
         {
             ranOutOfO2.Invoke();
             this.enabled = false;

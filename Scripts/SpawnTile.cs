@@ -27,7 +27,7 @@ public class SpawnTile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        timeOffset -= 0.001f * Time.deltaTime;
+        timeOffset -= 0.003f * Time.deltaTime;
         if (Time.time - startTime > timeOffset)
         {
             if (Random.value < randomValue)
