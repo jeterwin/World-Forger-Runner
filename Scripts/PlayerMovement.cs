@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
-    private bool turnLeft, turnRight;
+    private bool turnLeft, turnRight, canTurnLeft = true, canTurnRight = true;
     public float speed = 7.0f;
     private CharacterController myCharacterController;
     public float speedtime;
@@ -30,10 +30,19 @@ public class PlayerMovement : MonoBehaviour
         turnLeft = Input.GetKeyDown(KeyCode.A);
         turnRight = Input.GetKeyDown(KeyCode.D);
 
-        if (turnLeft&& this.transform.localRotation.y - 90 >=  -90)
+        if (turnLeft && canTurnLeft)
+        {
             transform.Rotate(new Vector3(0f, -90f, 0f));
-        else if (turnRight && this.transform.localRotation.y + 90<=90)
+            canTurnLeft = false;
+            canTurnRight = true;
+        }
+        else if (turnRight && canTurnRight)
+        {
             transform.Rotate(new Vector3(0f, 90f, 0f));
+            canTurnRight = false;
+            canTurnLeft = true;
+        }
+
 
         myCharacterController.SimpleMove(new Vector3(0f, 0f, 0f));
         myCharacterController.Move(transform.forward * speed * Time.deltaTime);

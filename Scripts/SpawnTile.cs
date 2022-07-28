@@ -8,7 +8,7 @@ public class SpawnTile : MonoBehaviour
     int chance;
     bool canSpawn = true;
     public GameObject tileToSpawn, tileToSpawnVar1, tileToSpawnVar2, tileToSpawnVar3;
-    bool goingX = true, goingY = false, goingZ = true;
+    bool goingX = true, goingY = true, goingZ = true;
     public GameObject referenceObject;
     public float timeOffset = 0.6f;
     public float distanceBetweenTiles = 5.0F;
@@ -25,7 +25,7 @@ public class SpawnTile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         timeOffset -= 0.003f * Time.deltaTime;
         if (Time.time - startTime > timeOffset)
@@ -39,13 +39,13 @@ public class SpawnTile : MonoBehaviour
                 mainDirection = direction;
                 otherDirection = temp;
             }
-            Vector3 spawnPos = previousTilePosition + distanceBetweenTiles * direction;
+            Vector3 spawnPos = previousTilePosition + distanceBetweenTiles * otherDirection;
             startTime = Time.time;
             if (spawnPos.x != previousTilePosition.x && (spawnPos.y == previousTilePosition.y && spawnPos.z == previousTilePosition.z && (goingY == true || goingZ == true)))
             {
                 goingX = true;
                 goingY = goingZ = false;
-                if (Random.Range(1, 100) > 50)
+                if (Random.Range(1, 100) >= 50)
                 {
                     tileToSpawn = tileToSpawnVar1;
                 }
@@ -54,11 +54,12 @@ public class SpawnTile : MonoBehaviour
                     tileToSpawn = tileToSpawnVar2;
                 }
             }
+
             if (spawnPos.y != previousTilePosition.y && (spawnPos.x == previousTilePosition.x && spawnPos.z == previousTilePosition.z && (goingX == true || goingZ == true)))
             {
                 goingY = true;
                 goingX = goingZ = false;
-                if (Random.Range(1, 100) > 50)
+                if (Random.Range(1, 100) >= 50)
                 {
                     tileToSpawn = tileToSpawnVar2;
                 }
@@ -71,7 +72,7 @@ public class SpawnTile : MonoBehaviour
             {
                 goingZ = true;
                 goingX = goingY = false;
-                if(Random.Range(1, 100) >= 40)
+                if(Random.Range(1, 100) >= 50)
                 {
                     tileToSpawn = tileToSpawnVar3;
                 }

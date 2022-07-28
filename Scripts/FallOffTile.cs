@@ -13,6 +13,6 @@ public class FallOffTile : MonoBehaviour
     }
     void invokeEvent()
     {
-        Event.Invoke();
+        Destroy(this);
     }
 }
