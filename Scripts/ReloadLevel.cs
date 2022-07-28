@@ -8,4 +8,8 @@ public class ReloadLevel : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void quit()
+    { 
+        Application.Quit();
+    }
 }

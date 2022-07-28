@@ -10,6 +10,7 @@ public class PressWToStart : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.W))
         {
             events.Invoke();
+            this.enabled = false;
         }
     }
 }
